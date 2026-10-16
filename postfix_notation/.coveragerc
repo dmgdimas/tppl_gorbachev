@@ -1,0 +1,7 @@
+[run]
+source = main
+omit =
+    test_*.py
+
+[report]
+show_missing = True
