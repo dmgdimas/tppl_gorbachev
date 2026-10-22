@@ -1,6 +1,7 @@
 """Стековая машина для вычисления выражений в постфиксной нотации."""
 
 import math
+import os
 import sys
 from typing import List, Optional, Union
 
@@ -138,6 +139,14 @@ def main(argv: Optional[List[str]] = None) -> int:
     """Точка входа командной строки."""
     if argv is None:
         argv = sys.argv[1:]
+    # Если оболочка раскрыла ~ как домашнюю директорию:
+    try:
+        home_dir = os.path.expanduser("~")
+    except Exception:
+        home_dir = None
+        
+    if home_dir and home_dir != "~":
+        argv = ["~" if arg == home_dir else arg for arg in argv]
 
     if not argv:
         print(USAGE, file=sys.stderr)
