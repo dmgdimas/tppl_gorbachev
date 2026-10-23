@@ -7,7 +7,7 @@ from typing import List, Optional, Union
 
 Number = Union[int, float]
 
-OPERATORS = {"+", "-", "*", "/", "~"}
+OPERATORS = {"+", "-", "*", "/", "~", "!"}
 
 USAGE = (
     "Использование: python main.py <выражение в постфиксной нотации>\n"
@@ -95,6 +95,8 @@ def apply_operator(stack: List[Number], operator: str) -> None:
                 total = sum(stack) + left + right
                 result = total * total
                 collapse_stack = True
+        elif operator == "!":
+            result = left ** right
         else:
             raise StackMachineError(f"Неизвестная операция: {operator!r}")
     except OverflowError as exc:
